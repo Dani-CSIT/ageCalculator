@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        .card {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        body {
+            background-color: beige;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Age Calculator</h1>
+    <div class="containerAge">
+        <label for="age">Enter Your Current Age:</label>
+        <input type="number" id="age"> <br><br>
+        <button onclick="calculate()">Submit Your Age</button><br/><br/>
+    </div>
+    <div class="card-container">
+        <div id="previous-birthday" class="card">Previous-Birthday</div>
+        <div id="current-birthday" class="card">Current-Birthday</div>
+        <div id="upcoming-birthday" class="card">Upcoming-Birthday</div>
+    </div>
+
+    <script>
+        function calculate() {
+            const inputAge = document.getElementById("age");
+            const age = parseInt(inputAge.value);
+
+            const today = new Date();
+            const currentYear = today.getFullYear();
+
+            const previousBirthday = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+            previousBirthday.setFullYear(previousBirthday.getFullYear() - age);
+            
+            const currentBirthday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            currentBirthday.setFullYear(currentBirthday.getFullYear() - age);
+            
+            const upcomingBirthday = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
+            upcomingBirthday.setFullYear(upcomingBirthday.getFullYear() - age);
+
+            document.getElementById("previous-birthday").innerHTML = `<h3>Previous Birthday: ${previousBirthday.toLocaleDateString()}</h3>`;
+            document.getElementById("current-birthday").innerHTML = `<h3>Current Birthday: ${currentBirthday.toLocaleDateString()}</h3>`;
+            document.getElementById("upcoming-birthday").innerHTML = `<h3>Upcoming Birthday: ${upcomingBirthday.toLocaleDateString()}</h3>`;
+        }
+    </script>
+</body>
+</html>
